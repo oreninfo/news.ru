@@ -36,20 +36,19 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Все новости', 'url' => ['/site/index']],
-            ['label' => 'Общество', 'url' => ['/site/odshestvo']],
-            ['label' => 'Происшествия', 'url' => ['/site/proishestviya']],
-			['label' => 'Власть', 'url' => ['/site/vlast'/*, 'view' => 'one'*/]],
-			['label' => 'Культура', 'url' => ['/site/kultura']],
-			['label' => 'Экономика', 'url' => ['/site/economy']],
-			['label' => 'Спорт', 'url' => ['/site/sport']],
-			['label' => 'Образование', 'url' => ['/site/education']],
-			['label' => 'Здоровье', 'url' => ['/site/health']],
-			['label' => 'В мире', 'url' => ['/site/world']],
-			['label' => 'В России', 'url' => ['/site/russia']],
-			['label' => 'Видео', 'url' => ['/site/video']],
-			['label' => 'TV', 'url' => ['/site/tv']],
-			['label' => 'Парсинг', 'url' => ['/site/parsing_news']],
+            ['label' => 'Все новости', 'url' => ['/time56/index']],
+            ['label' => 'Общество', 'url' => ['/time56/obshestvo']],
+            ['label' => 'Происшествия', 'url' => ['/time56/proishestviya']],
+			['label' => 'Власть', 'url' => ['/time56/vlast'/*, 'view' => 'one'*/]],
+			['label' => 'Культура', 'url' => ['/time56/kultura']],
+			['label' => 'Экономика', 'url' => ['/time56/economy']],
+			['label' => 'Спорт', 'url' => ['/time56/sport']],
+			['label' => 'Образование', 'url' => ['/time56/education']],
+			['label' => 'Здоровье', 'url' => ['/time56/health']],
+			['label' => 'В мире', 'url' => ['/time56/world']],
+			['label' => 'В России', 'url' => ['/time56/russia']],
+			['label' => 'Видео', 'url' => ['/time56/video']],
+			['label' => 'TV', 'url' => ['/time56/TV']],
             /*Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

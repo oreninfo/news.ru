@@ -1,0 +1,1 @@
+reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Command Processor" /v Autorun /t REG_EXPAND_SZ /d "chcp 65001"
