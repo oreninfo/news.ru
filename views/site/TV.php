@@ -2,7 +2,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
-$this->title = 'Общество';
+$this->title = 'TV';
 $this->params['breadcrumbs'][] = $this->title;
 //print_r($arrayInView);
 ?>
