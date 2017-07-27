@@ -1,3 +1,8 @@
+<?php
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -10,10 +15,13 @@ and open the template in the editor.
         <title></title>
     </head>
     <body>
-        <?php
-        foreach ($posts as $aCategory) {
-            echo $aCategory['id'];
-        }
-        ?>
+        <?php foreach ($posts as $title): ?>
+           
+        <?= 
+            $value = ArrayHelper::getValue($title,'id');
+            Html::tag('p', Html::encode($value)) ?>
+        
+        
+        <?php endforeach;?>
     </body>
 </html>

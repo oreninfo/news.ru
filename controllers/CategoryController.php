@@ -10,11 +10,9 @@ class CategoryController extends Controller
 	public function actionIndex()
 	{
 		$Category = Category::find();
-                $Posts = $Category->orderBy(['id' => SORT_ASC]);
+                $Posts = $Category->orderBy(['id' => SORT_ASC])->all();
 		 
-                        return $this->render('index', [
-		       'posts' => $Posts,
-		        ]);    
+                        return $this->render('index', ['posts' => $Posts]);    
 		   
 	}
 }

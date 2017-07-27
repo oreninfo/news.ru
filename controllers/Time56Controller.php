@@ -73,7 +73,6 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('index', [
-		       'posts' => $posts,
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
