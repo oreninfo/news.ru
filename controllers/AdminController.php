@@ -34,6 +34,7 @@ class AdminController extends Controller
         {
             $model->title=$_POST['Time56']['title'];
             $model->content=$_POST['Time56']['content'];
+            $model->created_at = date("Y-m-d H:i:s");
             if($model->validate() && $model->save())
             {
                 return $this->redirect(['index']);
