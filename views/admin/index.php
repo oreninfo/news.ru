@@ -20,10 +20,10 @@ use yii\widgets\ActiveForm;
             <td><?=$item->title?></td>
             <td><?=$item->created_at?></td>
             <td>
-                <a href="/admin/edit<?=$item->id?>">Редактировать</a>
-                <a href="/admin/delete<?=$item->id?>">Удалить</a>
+                <a href="/admin/edit/<?=$item->id?>">Редактировать</a>
+                <a href="/admin/delete/<?=$item->id?>">Удалить</a>
             </td>
         </tr>
-        <?php endforeach;?>
+        <?php endforeach; ?>
     </tbody>
 </table>
