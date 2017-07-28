@@ -24,7 +24,7 @@ class AdminController extends Controller
                 return $this->redirect(['index']);
             }
         }
-       return $this->render('edit', ['one'=>$one]);
+       return $this->render('edit',['one'=>$one]);
     }
     public function actionCreate()
     {
@@ -45,8 +45,10 @@ class AdminController extends Controller
     public function actionDelete($id)
     {
         $model = Time56::getOne($id);
+        if ($model !== NULL) {
         $model -> delete();
         return $this->redirect(['index']);
+        }
     }
 }
 /* 

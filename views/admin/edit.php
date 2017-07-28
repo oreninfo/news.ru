@@ -6,10 +6,10 @@ use yii\widgets\ActiveForm;
 
 <?php $form = ActiveForm::begin();?>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-2">
         <?= $form->field($one, 'title')->textInput() ?>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-10">
         <?= $form->field($one, 'content')->textInput() ?>
     </div>
     <div class="col-md-12">
