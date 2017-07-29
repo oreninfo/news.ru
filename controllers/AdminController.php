@@ -4,12 +4,24 @@ namespace app\controllers;
 use yii\web\Controller;
 use yii;
 use app\models\Time56;
+use yii\data\Pagination;
+
 class AdminController extends Controller
 {
     public function actionIndex()
     {
-        $array = Time56::getAll();
-        return $this->render('index', ['model'=>$array]);
+        #$query = Time56::getAll();
+        $oCountQuery = Time56::find();
+        #$countQuery = clone $query;
+        $oPages = new Pagination(['totalCount'=> $oCountQuery->count(), 'pageSize' => 100]);
+        $oPages->pageSizeParam = false;
+        $oModels = $oCountQuery->offset($oPages->offset)
+                ->limit($oPages->limit)
+                ->all();
+        
+        return $this->render('index', ['model'=>$oModels,
+                'pages' => $oPages,
+                ]);
     }
     public function actionEdit($id)
     {
@@ -19,6 +31,7 @@ class AdminController extends Controller
         {
             $one->title=$_POST['Time56']['title'];
             $one->content=$_POST['Time56']['content'];
+            #$one->created_at = date("Y-m-d H:i:s");
             if($one->validate() && $one->save())
             {
                 return $this->redirect(['index']);

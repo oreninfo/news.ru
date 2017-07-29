@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\widgets\LinkPager;
 ?>
 <h1>Админка</h1>
 <a href="/admin/create" class="btn btn-primary">Создать</a>
@@ -27,3 +28,5 @@ use yii\widgets\ActiveForm;
         <?php endforeach; ?>
     </tbody>
 </table>
+<?= LinkPager::widget(['pagination' => $pages,
+    ]); ?>
