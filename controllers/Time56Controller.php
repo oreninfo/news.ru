@@ -8,7 +8,6 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
 use app\models\Time56;
-use yii\base\Component;
 
 class Time56Controller extends Controller
 {

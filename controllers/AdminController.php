@@ -3,7 +3,9 @@ namespace app\controllers;
 
 use yii\web\Controller;
 use yii;
+use yii\web\UploadedFile;
 use app\models\Time56;
+use app\models\UploadForm;
 use yii\data\Pagination;
 
 class AdminController extends Controller
@@ -42,19 +44,40 @@ class AdminController extends Controller
     public function actionCreate()
     {
         $model = new Time56();
-        
-        if($_POST['Time56'])
+        $modelFile = new UploadForm();
+        if (Yii::$app->request->isPost) {
+            $modelFile->file = UploadedFile::getInstance($model, 'file');
+            if ($modelFile->file && $modelFile->validate()) {
+                $modelFile->file->saveAs('img/embl/'.$modelFile->file->baseName.'.'.$modelFile->file->extension);
+                $model->file='/img/embl/'.$modelFile->file->baseName.'.'.
+                        $modelFile->file->extension;
+            }
+            }
+        if ($model->load(Yii::$app->request->post())&& $model->save()) {
+            return $this->redirect(['index']);
+        }
+        else {
+            return $this->render('create',[
+                'model'=>$model,
+                'modelFile'=>$modelFile,
+            ]);
+        }
+    }
+       /* if($_POST['Time56'])
         {
             $model->title=$_POST['Time56']['title'];
             $model->content=$_POST['Time56']['content'];
+            $model->image_path=$_POST['Time56']['image_path'];
+            $model->id_category=$_POST['Time56']['id_category'];
             $model->created_at = date("Y-m-d H:i:s");
             if($model->validate() && $model->save())
             {
                 return $this->redirect(['index']);
             }
         }
-       return $this->render('create', ['model'=>$model]);
-    }
+       return $this->render('create', ['model'=>$model,
+           ]);
+    } */
     public function actionDelete($id)
     {
         $model = Time56::getOne($id);

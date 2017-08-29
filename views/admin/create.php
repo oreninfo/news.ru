@@ -4,7 +4,7 @@ use yii\widgets\ActiveForm;
 ?>
 <h1>Создать</h1>
 
-<?php $form = ActiveForm::begin();?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);?>
 <div class="row">
     <div class="col-md-8">
         <?= $form->field($model, 'title')->textInput() ?>
@@ -15,8 +15,11 @@ use yii\widgets\ActiveForm;
      <div class="col-md-8">
         <?= $form->field($model, 'image_path')->textInput() ?>
     </div>
+    <div class="col-md-8">
+        <?= $form->field($model, 'file')->fileInput() ?>
+    </div>
      <div class="col-md-8">
-        <?=$form->field($model, 'id_category')->dropDownList(['1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10','11'=>'11','12'=>'12']); ?> 
+        <?=$form->field($model, 'id_category')->dropDownList(['1'=>'Общество','2'=>'Происшествие','3'=>'Власть','4'=>'Культура','5'=>'Экономика','6'=>'Спорт','7'=>'Образование','8'=>'Здоровье','9'=>'В мире','10'=>'В России','11'=>'Видео','12'=>'TV']); ?> 
     </div> 
     <div class="col-md-12">
         <?= Html::submitButton('Создать', ['class' => 'btn btn-success'])?>
