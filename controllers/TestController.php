@@ -8,21 +8,22 @@ use app\models\UploadForm;
  
 class TestController extends Controller
 {
-    public $layout = 'photo';
     
-   public function actionIndex()
+   public function actionUpload()
    {
     
     $model = new UploadForm();
     
-  if(Yii::$app->request->post())
+  if(Yii::$app->request->isPost())
   {
-  $model->file = UploadedFile::getInstance($model, 'file');
-    if ($model->validate()) {
-     $path = Yii::$app->params['pathUploads'] . 'test/';
-     $model->file->saveAs( $path . $model->file);
+  $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+    if ($model->upload()) {
+     #$path = Yii::$app->params['pathUploads'] . 'test/';
+     #$model->file->saveAs( $path . $model->file);
+    
+        return;
     }
     }
-    return $this->render('index', ['model'=>$model]);
+    return $this->render('upload', ['model'=>$model]);
    } 
 }
