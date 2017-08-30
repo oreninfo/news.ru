@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
     ]); 
 ?>
  
-<?= $form->field($model, 'file')->fileInput(); ?>
+<?= $form->field($model, 'imageFile')->fileInput(); ?>
  
 <button>Submit</button>
  
