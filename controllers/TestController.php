@@ -13,8 +13,10 @@ class TestController extends Controller
    {
     
     $model = new UploadForm();
-    
-  if(Yii::$app->request->post())
+    if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        $model->file->saveAs('photo/'.$model->file->baseName.$model->file->extension);
+    }
+  /*if(Yii::$app->request->post())
   {
   $model->file = UploadedFile::getInstance($model, 'file');
     if ($model->upload()) {
@@ -23,7 +25,7 @@ class TestController extends Controller
     
         return;
     }
-    }
+    }*/
     return $this->render('upload', ['model'=>$model]);
    } 
 }
