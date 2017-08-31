@@ -14,12 +14,12 @@ class TestController extends Controller
     
     $model = new UploadForm();
     
-  if(Yii::$app->request->isPost())
+  if(Yii::$app->request->post())
   {
   $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
     if ($model->upload()) {
-     #$path = Yii::$app->params['pathUploads'] . 'test/';
-     #$model->file->saveAs( $path . $model->file);
+     $path = Yii::$app->params['pathUploads'] . 'test/';
+     $model->file->saveAs( $path . $model->file);
     
         return;
     }
