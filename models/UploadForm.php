@@ -16,7 +16,7 @@ class UploadForm extends Model
             [['file'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg']
         ];
     }
-        public function upload()
+       /* public function upload()
     {
         if ($this->validate()) {
             $this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
@@ -25,5 +25,5 @@ class UploadForm extends Model
             return false;
         }
     } 
-   
+   */
 }

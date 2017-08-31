@@ -16,7 +16,7 @@ class TestController extends Controller
     
   if(Yii::$app->request->post())
   {
-  $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+  $model->file = UploadedFile::getInstance($model, 'file');
     if ($model->upload()) {
      $path = Yii::$app->params['pathUploads'] . 'test/';
      $model->file->saveAs( $path . $model->file);
