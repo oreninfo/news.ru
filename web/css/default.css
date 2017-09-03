@@ -1,0 +1,995 @@
+/*-------Ошибки--------*/
+@import url("../adm/css/errors.css");
+
+.show_all
+{
+	padding: 20px 0 20px 0;
+	clear: both;
+}
+
+.previous_next_links
+{
+	clear: both;
+	padding-top: 40px;
+	height: 40px;
+}
+
+.previous_link
+{
+	width: 40%;
+	float: left;
+}
+
+.next_link
+{
+	width: 40%;
+	float: right;
+	text-align: right;
+}
+
+.errors{
+	color: red;
+	margin: 5px 0 10px;
+	font-size: 0.9em;
+}
+.infofield{
+}
+.captcha{
+	margin-top: 3px;
+}
+.infoform{
+	margin-top: 20px;
+}
+.required_field{
+	font-size: 0.9em;
+	margin-top: 10px;
+}
+.inpattachment{
+	padding-bottom: 5px;
+}
+.timecalendar{
+	background: url("../adm/img/input_calendar.png") no-repeat scroll right center #FFFFFF;
+}
+.attachment{
+	padding-bottom: 5px;
+}
+.paginator
+{
+	clear:both;
+	text-align:center;
+	margin: 20px;
+}
+
+.paginator a:link, .paginator a:visited, .paginator span
+{
+	margin: 0px 5px;
+}
+
+.shop_search .infofield{
+	display: block;
+}
+textarea {
+	height: 80px;
+	width: 350px;
+}
+
+.bbcode_toolbar{
+	margin-bottom: 0px;
+}
+.bbcode_toolbar img{
+	cursor: pointer;
+}
+
+.shop_list {
+	margin: 0 0 15px 0;
+	padding: 0 0 15px 0;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.shop{
+	margin: 0 0 15px 0;
+	padding: 0 0 15px 0;
+	border-bottom: 1px solid #eeeeee;
+	width: 95%;
+}
+
+.shop td {
+	padding: 0px !important;
+}
+
+.shop_cat_link {
+	padding-bottom: 10px;
+	font-size: 130%;
+	font-weight: bold;
+}
+
+.shop_block, .shop_block_coupon {
+	padding: 10px;
+	border: 1px solid #eeeeee;
+	margin: 0 0 25px 0;
+}
+
+.shop_sort {
+	margin-left: 20px;
+	margin-bottom: 20px;
+	font-size: 90%;
+	font-weight: bold;
+}
+
+.shop_name a:link, .shop_name a:visited{
+	font-weight: bold;
+}
+
+.shop_name a:hover{
+	text-decoration: none;
+}
+
+.shop_img{
+	margin: 5px 5px 5px 0;
+}
+
+.shop_all_img  {
+	border: 1px solid #9c9c9c;
+	padding: 3px;
+}
+
+.shop_param, .shop_id .shop_rel .shop_param{
+	font-size: 11px;
+	font-style: italic;
+}
+
+.shop_param a:link, .shop_param a:visited{
+	color: #142a35;
+}
+
+.shop_block .shop_img img, .shop_list .shop_img img{
+	border: 1px solid #9c9c9c;
+	padding: 3px;
+}
+
+.shop_discount{
+	width: 150px;
+	background: url(../img/discount.gif) no-repeat 0 0;
+	height: 14px;
+	color: #ffffff;
+	font-size: 11px;
+	font-style: italic;
+	margin: 5px 0 0 0;
+	padding: 0 0 0 5px;
+}
+
+.shop_new, .shop_action, .shop_hit {
+	font-weight: bold;
+	font-size: 12px;
+	color: #ffffff;
+	padding: 2px;
+}
+
+.shop_new {
+	background: #008800;
+	width: 53px;
+}
+
+.shop_action {
+	background: #ff0000;
+	width: 39px;
+}
+
+.shop_hit {
+	background: #0000ff;
+	width: 24px;
+}
+
+.shop_price_value, .shop_price_currency{
+	color: #bf4600;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.shop_old_price{
+	color: #89949a;
+	font-weight: normal;
+	font-size: 13px;
+	font-style: italic;
+}
+
+.shop_old_price .shop_price_value, .shop_old_price .shop_price_currency{
+	color: #89949a;
+	font-weight: normal;
+	font-size: 13px;
+	font-style: italic;
+}
+
+.shop_id .shop_img img{
+	border: 1px solid #f1f1f0;
+}
+
+.shop_id .shop_param{
+	font-weight: bold;
+	font-style: normal;
+	font-size: 13px;
+	margin-top: 3px;
+	margin-left: 5px;
+}
+
+.shop_id .shop_param_title{
+	font-weight: bold;
+	font-style: normal;
+	font-size: 13px;
+	margin-top: 6px;
+	margin-bottom: 3px;
+	background:  #dfdfdf;
+	padding: 5px;
+}
+
+.shop_id .shop_param_value{
+	font-weight: normal;
+}
+
+.shop_left{
+	float: left;
+	padding: 0 20px 0 0;
+}
+
+.shop_right{
+	float: left;
+	padding: 18px 0 0 0;
+}
+
+.shop_id .shop_right{
+	padding: 0;
+}
+
+.shop-form {
+	margin-bottom: 10px;
+}
+.shop_compare_description{
+    margin: 0;
+    padding: 1px 0;
+}
+
+.shop_compare_left{
+     float:left;
+    width:19%;
+}
+
+.shop_compare_list{
+    float:left;
+    width:70%;
+    padding: 0 5%;
+    overflow: hidden;
+}
+
+.shop_compare_page{
+    clear: both;
+    overflow: hidden;
+}
+
+.shop_compare_list .shop{
+    width: 30%;
+    margin: 0 10px 3% 0; 
+    float: left;
+}
+
+.shop_compare_list .shop_basic{
+    overflow: hidden;
+    margin: 0 0 5px;
+}
+
+.shop_compare_list .shop_param{
+    padding: 4px;
+    background: #EEEEEE;
+    border-top:#CACACA solid 1px;
+    border-bottom:#CACACA solid 1px;
+    margin: 1px 0;
+    font-size: 13px;
+}
+
+.shop_param_existed{
+    padding: 4px;
+    background: #EEEEEE;
+    border-top:#CACACA solid 1px;
+    border-bottom:#CACACA solid 1px;
+    margin: 1px 0;
+    font-size: 13px;
+}
+
+.shop_compare_list   .shop_param_difference,
+.shop_compare_left  .shop_param_difference{
+    background: #F4C1C1;
+    border-top:#C69393 solid 1px;
+    border-bottom:#C69393 solid 1px;
+}
+
+.ads_date{
+	font-size: 11px;
+	font-style: italic;
+}
+
+.ads_param {
+	float: left;
+	margin-right: 5px;
+}
+
+.ads_param_value, .ads_name {
+	font-weight: bold;
+}
+
+.ads_id .ads_param {
+	float: none;
+}
+
+.rating{
+	display: inline-block;
+	padding: 10px 0 10px 0;
+	border-bottom: 1px solid #eeeeee;
+	margin: 0 0 10px 0;
+}
+
+.rating_votes {
+	white-space: nowrap;
+}
+
+.comments_name{
+	font-weight: bold;
+}
+
+.comments_date{
+	font-size: 11px;
+	font-style: italic;	
+}
+
+.comment{
+	padding: 10px 0px;
+}
+
+.comment .comments_form{
+	padding: 15px 0px 15px 30px;
+}
+
+a.comments_show_form:link, a.comments_show_form:visited{
+	text-decoration: none;
+	border-bottom: 1px dashed !important;
+}
+
+.comments_level {
+	background: url("../modules/forum/img/arrow.gif") no-repeat scroll 10px 8px transparent;
+	padding-left: 30px;
+}
+.comments_form div{
+	margin-bottom: 10px;
+}
+
+.comments_param_title{
+	font-weight: bold;
+}
+.cart_not_registrations {
+	padding: 30px 0 30px 0;
+}
+
+.cart_autorization{
+	padding: 30px 0 30px 0;
+}
+
+.cart_registration{
+	padding: 30px 0 30px 0;
+}
+
+.cart_payment_text, .cart_additional_cost_text, .cart_delivery_text {
+	margin-left: 20px;
+	font-size: 11px;
+	font-style: italic;
+}
+
+.cart_right{
+	width: 200px;
+	background: url(../img/cart_y.png) repeat-y 0 0;
+	margin: 7px 0 35px 0;
+	position: relative;
+	padding: 10px;
+}
+
+.cart_right_top{
+	width: 220px;
+	height: 7px;
+	background: url(../img/cart_top_bottom.png) no-repeat 0 0;
+	position: absolute;
+	top: -7px;
+	left: 0;
+}
+
+.cart_right_bottom{
+	width: 220px;
+	height: 7px;
+	background: url(../img/cart_top_bottom.png) no-repeat 0 -7px;
+	position: absolute;
+	bottom: -7px;
+	left: 0;
+}
+
+.cart_last_tr {
+	font-weight: bold;
+}
+
+.cart_summ, .cart_count {
+	font-weight: bold;
+}
+
+.cart_block {
+	background: url(../img/cart_icon.png) no-repeat 0 7px;
+	padding: 1px 0 0 25px;
+}
+
+.cart_block span a:link, .cart_block span a:visited{
+	font-size: 18px;
+	font-weight: bold;
+	display: block;
+	margin: 0 0 10px 0;
+}
+
+.cart_recalc, .wishlist_recalc {
+	float: right;
+	margin-right: 60px;
+}
+
+
+.news_block{
+/*	width: 200px;
+	padding: 10px;
+	margin: 0 0 25px 0;*/
+}
+
+.news{
+	width: 100%;
+	/*border-bottom: 1px solid #eeeeee;*/
+	padding: 0 0 10px 0;
+	margin: 20px 0 0px 0;
+	clear: both;
+	min-height: 90px;
+}
+
+.news_date{
+	font-size: 11px;
+	font-style: italic;
+}
+
+.news_name a:link, .news_name a:visited{
+	font-weight: bold;
+}
+
+.news_anons{
+	margin-top: 10px;
+}
+
+.news_img {
+	padding: 3px;
+	float: left;
+	padding: 5px 15px 10px 0;
+}
+
+.news_all_img {
+	padding: 3px;
+}
+
+.news_all_img  img{
+	margin: 0px 5px 5px 0px;
+}
+.news_all_img img:after {
+	clear: left;
+}
+.news_day_current,
+.news_year_current,
+.news_month_current{
+	background: #ccc;
+}
+.news_day_today
+{
+	border: 1px solid #999;
+}
+
+.banners_block {
+	/*padding: 20px;*/
+	text-align: center;
+}
+
+.clauses_block{
+	padding: 10px;
+	margin: 0 0 25px 0;
+}
+
+.clauses {
+	width: 100%;
+	border-bottom: 1px solid #eeeeee;
+	padding: 0 0 11px 0;
+	margin: 0 0 11px 0;
+	min-height: 90px;
+}
+
+.clauses_block .clauses_date, .clauses_date{
+	font-size: 11px;
+	font-style: italic;
+}
+
+.clauses_block .clauses_name a:link, .clauses_block .clauses_name a:visited, .clauses_name a:link, .clauses_name a:visited
+{
+	font-weight: bold;
+}
+
+.clauses_block img{
+	border: 1px solid #9c9c9c;
+	margin: 5px 0 0 0;
+}
+
+.clauses_img {
+	padding: 0px 5px 5px 0px;
+	float: left;
+}
+
+.clauses_block .show_all a:link, .clauses_block .show_all a:visited{
+	color: #142a35;
+	font-size: 11px;
+	font-style: italic;
+}
+
+.faq_block{
+	padding: 10px;
+	margin: 0 0 25px 0;
+}
+
+.faq_block p{
+	margin: 0;
+	padding: 0;
+}
+
+.faq{
+	width: 100%;
+	border-bottom: 1px solid #eeeeee;
+	padding: 0 0 11px 0;
+	margin: 0 0 11px 0;
+}
+
+.faq_date{
+	font-size: 11px;
+	font-style: italic;
+}
+
+.faq_question{
+	padding: 5px 0 5px 0;
+}
+
+.faq_answer{
+	padding-left: 15px;
+}
+
+.faq_id .faq_question{
+	font-weight: bold;
+}
+
+.tags{
+	margin: 10px 0 5px 0;
+}
+
+.tags_block{
+	padding: 10px;
+	background: #e8e8e1;
+	margin: 20px 0 25px 0;
+}
+
+.files_block{
+	padding: 10px;
+	border: 1px solid #eeeeee;
+	margin: 0 0 25px 0;
+}
+
+.files{
+	width: 100%;
+	border-bottom: 1px solid #eeeeee;
+	padding: 0 0 20px 0;
+	margin: 30px 0 0px 0;
+	clear: both;
+	min-height: 90px;
+}
+
+.files_date{
+	font-size: 11px;
+	font-style: italic;
+}
+
+.files_name a:link, .files_name a:visited{
+	font-weight: bold;
+}
+
+.files_anons{
+	margin-top: 10px;
+}
+
+.files_download {
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
+
+.files_download a {
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 120%;
+	text-align: center;
+	padding: 7px;
+	background:  #ff6600;
+}
+
+.files_download .files_size {
+	
+}
+
+.files_img {
+	padding: 3px;
+	float: left;
+}
+
+.files_all_img {
+	padding: 3px;
+}
+
+.files_all_img  img{
+	clear: left;
+}
+
+.votes_block {
+	margin: 0 0 25px 0;
+}
+
+.votes_block h2{
+	padding: 0 10px 0 10px;
+}
+
+.votes_question{
+	margin: 0 0 15px 0;
+	padding: 0 10px 0 10px;
+}
+
+.votes_form_answer{
+	padding: 0 10px 0 10px;
+}
+
+.votes_block .button_wrap{
+	padding: 0 0 0 7px;
+}
+
+.votes_block .button{
+	padding: 0 7px 0 0;
+}
+
+*+html .votes_block .button_wrap{
+	padding: 0 0 0 5px;
+}
+
+*+html .votes_block .button{
+	padding: 0 5px 0 0;
+	font-size: 12px;
+}
+
+.votes_block .votes_wrap{
+	background: url(../img/button_votes_left.gif) no-repeat 0 0;
+	padding: 0 0 0 7px;
+	display: inline-block;
+	margin: 0;
+}
+
+.votes_block .votes_result{
+	height: 36px;
+	background: url(../img/button_votes_right.gif) no-repeat 100% 0;
+	padding: 0 7px 0 0;
+	border: 0px;
+	color: #142a35;
+	margin: 0;
+	font-weight: bold;
+}
+
+*+html .votes_block .votes_wrap{
+	padding: 0 0 0 3px;
+}
+
+*+html .votes_block .votes_result{
+	padding: 0 3px 0 0;
+	font-size: 12px;
+}
+
+.votes_block .votes_wrap, .votes_block .button_wrap{
+	margin: 10px 0 0 0;
+}
+
+.photo {
+	margin: 0px 5px 5px 0px;
+	float: left;
+	height: 150px;
+	overflow: hidden;	
+}
+
+.photo_name {
+	width: 170px;
+}
+
+.photo_img img {
+	border: 1px solid #9c9c9c;
+}
+
+.photo_block{
+	padding: 10px;
+	background: #e8e8e1;
+	margin: 0 0 25px 0;
+	text-align: center;
+}
+
+.photo_block h2{
+	text-align: left;
+}
+
+.photo_block .photo_size{
+	font-size: 11px;
+	font-style: italic;
+	color: #728087;
+}
+
+.photo_first_page{
+	float: left;
+	width: 200px;
+	margin-right: 20px;
+}
+
+.photo_first_page .show_all{
+	padding-top: 0px;
+}
+
+/* forum */
+table.forum_list {
+	width: 100%;
+}
+table.forum_list td {
+	padding-bottom: 10px;
+	padding-top: 20px;
+	vertical-align: top;
+}
+.forum_name
+{
+	font-weight: bold;
+}
+.forum_title {
+	font-weight: bold;
+}
+.forum_category .forum_name
+{
+	font-weight: normal;
+}
+.forum_category_name .forum_name
+{
+	margin-left: 0px;
+}
+.forum_category_name a
+{
+	margin-left: 10px;
+}
+a.forum_blocked:link, a.forum_blocked:visited, .forum_blocked
+{
+	color: gray;
+}
+.forum_date
+{
+	color: #999999;
+}
+.forum_author
+{
+	font-style:italic;
+}
+a.forum_message_show_form:link, a.forum_message_show_form:visited
+{
+	text-decoration: none;
+	border-bottom: 1px dashed !important;
+
+}
+.forum_actions
+{
+	float: right;
+	width: 130px;
+	height:20px;
+	text-align:right;
+}
+.forum_actions span
+{
+	display:none;
+	padding: 0px 5px;
+}
+.forum_actions img
+{
+	margin: 0px 5px;
+}
+
+.forum_search
+{
+	text-align: right;
+	padding: 10px 0px 20px 0px;
+	white-space: nowrap;
+}
+.forum_search .inptext{}
+.forum_search .button1 {
+	font-weight: normal;
+	font-size: 0.9em;
+	text-transform: lowercase;
+	margin-top: 10px;
+	padding: 3px 7px;
+	border:0px;
+}
+
+.forum_add
+{
+	background: transparent url(../modules/forum/img/add.gif) no-repeat center left;
+	font-weight: bold;
+	margin: 30px 0;
+	padding: 0 0 0 20px;
+}
+
+.forum_list
+{
+	width: 100%;
+	border: 0px;
+	border-collapse: collapse;
+}
+.forum_list th
+{
+	color: #999;
+	font-weight: normal;
+	font-size:1.3em;
+	padding: 0px 20px 15px 0px;
+	text-align: left;
+}
+.forum_list td
+{
+	border-top: 1px solid #E0E0E0;
+	vertical-align: middle;
+	padding: 10px 0px;
+}
+
+.forum_form{ margin-top: 10px; }
+.forum_form .inptext{}
+.forum_form textarea.inptext
+{
+	width: 100%;
+	height: 100px;
+	margin-top: 10px;
+}
+.forum_form .button{}
+.forum_form .attachment_extensions{}
+.forum_form .dashed_link{}
+.forum_form .hide_form
+{
+	display:none;
+}
+
+.forum_message
+{
+	clear: both;
+	padding: 10px 0px;
+}
+.forum_message_form
+{
+	padding: 10px 0px;
+}
+.forum_message .forum_author
+{
+	font-weight: bold;
+}
+.forum_message_form .inptext
+{
+	margin-bottom: 10px;
+}
+.forum_message_form textarea
+{
+	width: 500px;
+	height: 200px;
+}
+.message_new
+{
+	background:#ffecf1;
+}
+.message_list .actions_message
+{
+	float: right;
+	width: 90px;
+	height:20px;
+	text-align:right;
+}
+.message_list .actions_message span{}
+.message_list .actions_message img{}
+.message_list .message{}
+.message_list .message .quote
+{
+	background: #f9f2f2;
+	border: 1px solid #c2c0b4;
+	padding: 10px;
+	margin: 5px 0px;
+}
+.message_list .message .code
+{
+	background: #f2f9f9;
+	border: 1px solid #c2c0b4;
+	padding: 10px;
+	margin: 5px 0px;
+}
+.message_list .message .quote_header,.message_list .message .code_header
+{
+	font-weight:bold;
+}
+
+.forum_message_level {
+	background: url("../modules/forum/img/arrow.gif") no-repeat scroll 10px 8px transparent;
+	padding-left: 30px;
+}
+
+.message_result
+{
+	display:none;
+}
+.bbutton
+{
+	border: 1px solid #ccc;
+	margin: 1px;
+	padding: 2px;
+}
+.bbutton:hover
+{
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+	-moz-opacity: 0.6;
+}
+.message_toolbar
+{
+	margin: 10px 0px 0px 0px;
+}	
+.avatar {
+	float: left;
+	margin: 0 10px 10px 0;
+}
+.forum_list .actions_message {
+	height: 20px;
+	width: 70px;
+}
+.forum_form textarea.inptext {
+	height: 100px;
+	margin-top: 10px;
+	width: 100%;
+}
+.forum_form .hide_form {
+	display: none;
+}
+.forum_new_messages {
+	margin: 0 0 10px 0;
+}
+
+.shop_compare_contaner{
+	display: inline-block;
+	padding: 0 0 0 14px;
+	background:url(../img/checkbox.gif) left 2px no-repeat;
+}
+.shop_compare_button{
+	border:none;
+	padding: 0;
+	background: none;
+	text-decoration: underline;
+}
+.shop_compare_button:hover{
+	text-decoration: none;
+}
+.shop_compare_checked{
+	background-position: left -19px;
+}
+.shop_no_buy, .shop_no_buy_good{
+	font-weight: bold;
+}
+.messages tr:hover{
+	background: #f8f8f8; 
+}
+.search_list{
+	margin-top: 10px;
+}
+.mistakes {
+	margin-top: 10px;
+	font-size: 10px;
+}
