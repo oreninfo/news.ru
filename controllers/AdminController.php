@@ -43,41 +43,23 @@ class AdminController extends Controller
     }
     public function actionCreate()
     {
-        $model = new Time56();
-        $modelFile = new UploadForm();
-        if (Yii::$app->request->isPost) {
-            $modelFile->file = UploadedFile::getInstance($model, 'file');
-            if ($modelFile->file && $modelFile->validate()) {
-                $modelFile->file->saveAs('img/embl/'.$modelFile->file->baseName.'.'.$modelFile->file->extension);
-                $model->file='/img/embl/'.$modelFile->file->baseName.'.'.
-                        $modelFile->file->extension;
-            }
-            }
-        if ($model->load(Yii::$app->request->post())&& $model->save()) {
-            return $this->redirect(['index']);
-        }
-        else {
-            return $this->render('create',[
-                'model'=>$model,
-                'modelFile'=>$modelFile,
-            ]);
-        }
-    }
-       /* if($_POST['Time56'])
-        {
-            $model->title=$_POST['Time56']['title'];
-            $model->content=$_POST['Time56']['content'];
-            $model->image_path=$_POST['Time56']['image_path'];
-            $model->id_category=$_POST['Time56']['id_category'];
-            $model->created_at = date("Y-m-d H:i:s");
-            if($model->validate() && $model->save())
-            {
+        $oModel = new Time56();
+        if ($oModel->load(Yii::$app->request->post()) && $oModel->save()) 
+         {
+            $oModel->imageFile = UploadedFile::getInstance($oModel, 'file');
+            $oModel->imageFile->saveAs('photo/'.$oModel->imageFile->baseName.".".$oModel->imageFile->extension);
+            $oModel->title=Yii::$app->request->post('title');
+            $oModel->content=Yii::$app->request->post('content');
+            $oModel->image_path='photo/'.$oModel->imageFile->baseName.".".$oModel->imageFile->extension;
+            $oModel->id_category=Yii::$app->request->post('id_category');
+            $oModel->created_at = date("Y-m-d H:i:s");
+            #if($oModel->validate() && $oModel->save())
+            #{
                 return $this->redirect(['index']);
-            }
-        }
-       return $this->render('create', ['model'=>$model,
-           ]);
-    } */
+            #}
+         }
+            return $this->render('create', ['oModel'=>$oModel]);
+    }
     public function actionDelete($id)
     {
         $model = Time56::getOne($id);
