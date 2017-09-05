@@ -44,19 +44,19 @@ class AdminController extends Controller
     public function actionCreate()
     {
         $oModel = new Time56();
-        if ($oModel->load(Yii::$app->request->post()) && $oModel->save()) 
+        if ($oModel->load(Yii::$app->request->post())) 
          {
-            $oModel->imageFile = UploadedFile::getInstance($oModel, 'file');
+            $oModel->imageFile = UploadedFile::getInstance($oModel, 'imageFile');
             $oModel->imageFile->saveAs('photo/'.$oModel->imageFile->baseName.".".$oModel->imageFile->extension);
             $oModel->title=Yii::$app->request->post('title');
             $oModel->content=Yii::$app->request->post('content');
             $oModel->image_path='photo/'.$oModel->imageFile->baseName.".".$oModel->imageFile->extension;
             $oModel->id_category=Yii::$app->request->post('id_category');
             $oModel->created_at = date("Y-m-d H:i:s");
-            #if($oModel->validate() && $oModel->save())
-            #{
+            if($oModel->validate() && $oModel->save())
+            {
                 return $this->redirect(['index']);
-            #}
+            }
          }
             return $this->render('create', ['oModel'=>$oModel]);
     }

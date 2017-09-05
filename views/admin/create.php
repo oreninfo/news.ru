@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($oModel, 'content')->textarea(['rows'=>5,'cols'=>10])->label('Текст новости') ?>
     </div>
     <div class="col-md-8">
-        <?= $form->field($oModel, 'file')->fileInput()->label('Загрузка картинки') ?>
+        <?= $form->field($oModel, 'imageFile')->fileInput()->label('Загрузка картинки') ?>
     </div> 
      <div class="col-md-8">
         <?=$form->field($oModel, 'id_category')->dropDownList(['1'=>'Общество','2'=>'Происшествие','3'=>'Власть','4'=>'Культура','5'=>'Экономика','6'=>'Спорт','7'=>'Образование','8'=>'Здоровье','9'=>'В мире','10'=>'В России','11'=>'Видео','12'=>'TV'])->label('Рубрики'); ?> 
