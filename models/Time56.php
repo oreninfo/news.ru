@@ -12,7 +12,7 @@ class Time56 extends ActiveRecord
         {
             return [
                 [['title','content','image_path', 'id_category'], 'required'],
-                [['imageFile'], 'imageFile', 'skipOnEmpty' => false, 'extensions' => 'png, jpg']
+                [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg']
             ];
         }
         public static function tableName()

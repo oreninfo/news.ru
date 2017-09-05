@@ -53,8 +53,9 @@ class AdminController extends Controller
             $oModel->image_path='photo/'.$oModel->imageFile->baseName.".".$oModel->imageFile->extension;
             $oModel->id_category=Yii::$app->request->post('id_category');
             $oModel->created_at = date("Y-m-d H:i:s");
-            if($oModel->validate() && $oModel->save())
+            if($oModel->validate())
             {
+                $oModel->save(false);
                 return $this->redirect(['index']);
             }
          }
