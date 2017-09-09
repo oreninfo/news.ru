@@ -12,7 +12,7 @@ class Time56 extends ActiveRecord
         {
             return [
                 [['title','content','image_path', 'id_category'], 'required'],
-               # [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+                [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg']
             ];
         }
         public static function tableName()
@@ -31,15 +31,6 @@ class Time56 extends ActiveRecord
                         ->one();
 		return $data;
 	}
-         public function upload()
-    {
-        if ($this->validate()) {
-            $this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-            return true;
-        } else {
-            return false;
-        }
-    }
 	
 }
 ?>

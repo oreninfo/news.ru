@@ -13,7 +13,8 @@ class TestController extends Controller
    {
     
     $model = new UploadForm();
-    if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    if ($model->load(Yii::$app->request->post())) 
+    {
         $model->file = UploadedFile::getInstance($model, 'file');
         $model->file->saveAs('photo/'.$model->file->baseName.".".$model->file->extension);
     }
