@@ -5,7 +5,6 @@ use yii\web\Controller;
 use yii;
 use yii\web\UploadedFile;
 use app\models\Time56;
-use app\models\UploadForm;
 use yii\data\Pagination;
 
 class AdminController extends Controller
@@ -27,19 +26,19 @@ class AdminController extends Controller
     }
     public function actionEdit($id)
     {
-        $one = Time56::getOne($id);
+        $oOne = Time56::getOne($id);
         
-        if($_POST['Time56'])
+        if($oOne->load(Yii::$app->request->post()))
         {
-            $one->title=$_POST['Time56']['title'];
-            $one->content=$_POST['Time56']['content'];
+            $oOne->title=$_POST['Time56']['title'];
+            $oOne->content=$_POST['Time56']['content'];
             #$one->created_at = date("Y-m-d H:i:s");
-            if($one->validate() && $one->save())
+            if($oOne->validate() && $oOne->save())
             {
                 return $this->redirect(['index']);
             }
         }
-       return $this->render('edit',['one'=>$one]);
+       return $this->render('edit',['oOne'=>$oOne]);
     }
     public function actionCreate()
     {
@@ -48,14 +47,15 @@ class AdminController extends Controller
          {
             $oModel->imageFile = UploadedFile::getInstance($oModel, 'imageFile');
             $oModel->imageFile->saveAs('photo/'.$oModel->imageFile->baseName.".".$oModel->imageFile->extension);
-            $oModel->title=Yii::$app->request->post('title');
-            $oModel->content=Yii::$app->request->post('content');
+            $oModel->title=$_POST['Time56']['title'];
+            $oModel->content=$_POST['Time56']['content'];
             $oModel->image_path='photo/'.$oModel->imageFile->baseName.".".$oModel->imageFile->extension;
-            $oModel->id_category=Yii::$app->request->post('id_category');
+            $oModel->id_category=$_POST['Time56']['id_category'];
             $oModel->created_at = date("Y-m-d H:i:s");
-            if($oModel->validate())
+            if($oModel->validate()&& $oModel->save())
             {
-                $oModel->save(false);
+               
+               
                 return $this->redirect(['index']);
             }
          }
@@ -63,9 +63,9 @@ class AdminController extends Controller
     }
     public function actionDelete($id)
     {
-        $model = Time56::getOne($id);
-        if ($model !== NULL) {
-        $model -> delete();
+        $oModel = Time56::getOne($id);
+        if ($oModel !== NULL) {
+        $oModel -> delete();
         return $this->redirect(['index']);
         }
     }
