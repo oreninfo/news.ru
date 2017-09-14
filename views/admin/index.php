@@ -20,6 +20,7 @@ use yii\widgets\LinkPager;
             <td><?=$item->id?></td>
             <td><?=$item->title?></td>
             <td><?=$item->created_at?></td>
+            <td><?=$item->id_category?></td>
             <td>
                 <a href="/admin/edit/<?=$item->id?>">Редактировать</a>
                 <a href="/admin/delete/<?=$item->id?>">Удалить</a>
