@@ -5,6 +5,7 @@ use yii\web\Controller;
 use yii;
 use yii\web\UploadedFile;
 use app\models\Time56;
+use app\models\Category;
 use yii\data\Pagination;
 
 class AdminController extends Controller
@@ -13,14 +14,16 @@ class AdminController extends Controller
     {
         #$oCountQuery = Time56::getAll();
         $oCountQuery = Time56::find()->orderBy(['id' => SORT_DESC ]);
+        $oCategory = Category::find()->all();
+        
         #$countQuery = clone $query;
         $oPages = new Pagination(['totalCount'=> $oCountQuery->count(), 'pageSize' => 100]);
         $oPages->pageSizeParam = false;
         $oModel = $oCountQuery->offset($oPages->offset)
                 ->limit($oPages->limit)
                 ->all();
-        
-        return $this->render('index', ['model'=>$oModel,
+        return $this->render('index', ['model'=>$oModel, 
+                'model_2'=>$oCategory,
                 'pages' => $oPages,
                 ]);
     }

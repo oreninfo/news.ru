@@ -11,11 +11,13 @@ use yii\widgets\LinkPager;
             <td>#</td>
             <td>Название</td>
             <td>Дата создания</td>
+            <td>Рубрика</td>
             <td>Действия</td>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($model as $item): ?>
+        <?php foreach ($model as $item): ?> 
+            <?php foreach($model_2 as $item2): ?>
         <tr>
             <td><?=$item->id?></td>
             <td><?=$item->title?></td>
@@ -26,6 +28,7 @@ use yii\widgets\LinkPager;
                 <a href="/admin/delete/<?=$item->id?>">Удалить</a>
             </td>
         </tr>
+        <?php endforeach; ?>
         <?php endforeach; ?>
     </tbody>
 </table>
