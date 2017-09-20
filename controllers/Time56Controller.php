@@ -11,6 +11,7 @@ use app\models\Time56;
 
 class Time56Controller extends Controller
 {
+    
     /**
      * @inheritdoc
      */
@@ -91,7 +92,7 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('obshestvo', [
-		       'posts' => $posts,
+		       
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
@@ -111,7 +112,7 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('proishestviya', [
-		       'posts' => $posts,
+		      
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
@@ -131,7 +132,7 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('vlast', [
-		       'posts' => $posts,
+		       
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
@@ -151,7 +152,7 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('kultura', [
-		       'posts' => $posts,
+		       
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
@@ -170,7 +171,7 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('economy', [
-		       'posts' => $posts,
+		      
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
@@ -190,7 +191,7 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('sport', [
-		       'posts' => $posts,
+		       
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
@@ -210,7 +211,7 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('education', [
-		       'posts' => $posts,
+		      
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
@@ -230,7 +231,7 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('health', [
-		       'posts' => $posts,
+		       
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
@@ -250,7 +251,7 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('world', [
-		       'posts' => $posts,
+		       
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
@@ -270,7 +271,7 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('russia', [
-		       'posts' => $posts,
+		       
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
@@ -290,7 +291,7 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('video', [
-		       'posts' => $posts,
+		      
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
@@ -310,7 +311,7 @@ class Time56Controller extends Controller
 		 ->limit($pagination->limit)
 		 ->all();
         return $this->render('TV', [
-		       'posts' => $posts,
+		       
 			   'active_page' => Yii::$app->request->get("page", 1),
 			   'count_pages' => $pagination->getPageCount(),
 			   'titles' => $titles,
@@ -318,6 +319,12 @@ class Time56Controller extends Controller
 			   
 		]);
 		
+    }
+    
+    public function actionThis($id)
+    {
+        $oModel = Time56::getOne($id);
+        return $this->render('this',['model'=>$oModel]);
     }
 	public function actionTime()
     {   
@@ -328,6 +335,7 @@ class Time56Controller extends Controller
     {   
         return $this->render('time-date', ['response' => date('d:m:Y')]);
     }
+    
 	
 }
 ?>

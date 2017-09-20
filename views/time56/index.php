@@ -42,8 +42,8 @@ function word_trim($string, $count, $ellipsis = FALSE){
 			   ?> 
 			   </div>
 			  <div class="news_name">
-			   <?= Html::a(Html::encode($text), ["'$title->content_path'"],[
-			  'title' => $title->title, 'align' => 'right']);?>
+			   <?= Html::a(Html::encode($text), ["time56/this/$title->id"],[
+			  'title' => $title->content_path, 'align' => 'right']);?>
 		       </div>
 			   <div class="news_anons"><p><?= Html::encode($text3)?></p>
 			   </div>
