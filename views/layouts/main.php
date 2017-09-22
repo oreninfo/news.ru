@@ -48,7 +48,7 @@ AppAsset::register($this);
 			['label' => 'В мире', 'url' => ['/time56/world']],
 			['label' => 'В России', 'url' => ['/time56/russia']],
 			['label' => 'Видео', 'url' => ['/time56/video']],
-			['label' => 'TV', 'url' => ['/time56/TV']],
+			['label' => 'TV', 'url' => ['/time56/tv']],
             /*Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

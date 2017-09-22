@@ -321,10 +321,10 @@ class Time56Controller extends Controller
 		
     }
     
-    public function actionThis($id)
+    public function actionNews($id)
     {
         $oModel = Time56::getOne($id);
-        return $this->render('this',['model'=>$oModel]);
+        return $this->render('news',['model'=>$oModel]);
     }
 	public function actionTime()
     {   
