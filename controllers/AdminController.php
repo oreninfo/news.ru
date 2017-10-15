@@ -34,9 +34,10 @@ class AdminController extends Controller
         {    
             
             $oOne->imageFile = UploadedFile::getInstance($oOne, 'imageFile');
-            $oOne->imageFile->saveAs('photo/'.$oOne->imageFile->baseName.".".$oOne->imageFile->extension);
-            $oOne->imageFile->tempName = 'photo/'.$oOne->imageFile->baseName.".".$oOne->imageFile->extension;
-            $oOne->image_path = $oOne->imageFile->tempName;
+            $fileName = 'photo/'.$oOne->imageFile->baseName.".".$oOne->imageFile->extension;
+            $oOne->imageFile->saveAs($fileName);
+            $oOne->imageFile->tempName = $fileName;
+            $oOne->image_path = $fileName;
             $oOne->created_at = date("Y-m-d H:i:s");
             if($oOne->validate() && $oOne->save())
             {
