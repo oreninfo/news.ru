@@ -17,6 +17,7 @@ class Time56 extends ActiveRecord
             return [
                [['title','content','image_path', 'id_category'], 'required'],
                [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+                [['tag_list'], 'safe'],
             ];
         }
         public static function tableName()
@@ -35,6 +36,23 @@ class Time56 extends ActiveRecord
                         ->one();
 		return $data;
 	}
-	
-}
+        public function getTags()
+        {
+            return $this->hasMany(Time56::className(), ['id' => 'news_id'])
+                    ->viaTable('time56_category', ['category_id' => 'id']);
+        }
+	public function behaviors()
+                {
+            return [
+                [
+                    'class' => \app\components\behaviors\ManyHasManyBehavior::className(),
+                    'relations' => [
+                    'tags' => 'tag_list',                   
+                        ],
+                    ],
+                ];
+                    
+                }
+                
+                }
 ?>
