@@ -22,7 +22,7 @@ for ($i = 0 ; $i < count($aNews); ++$i)
             }
         }
     }
-    //print_r($aValuesIns);
+    print_r($aValuesIns);
  	$aValuesIns = implode("," ,$aValuesIns);
 	$Query = "INSERT INTO `time56_category` (`news_id`, `category_id`) VALUES $aValuesIns;";
 	$hQuery = mysql_query($Query);
