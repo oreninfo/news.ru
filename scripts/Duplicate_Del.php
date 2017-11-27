@@ -1,14 +1,13 @@
 <?php
 $db = mysql_connect("localhost", "stas", "123456") or die ("MySQL сервер недоступен!" .mysql_error());
 mysql_select_db("link_bd", $db) or die ("Не удалось подключиться к базе даных!”" .mysql_error());
-$hQuery = mysql_query("SELECT * FROM time56 WHERE id IN (2, 132)");
-$aResult = mysql_fetch_assoc($hQuery);
-//foreach($aResult as $item)
-//{
-   print_r($aResult);
-//}
-/*
-while($aResult = mysql_fetch_assoc($hQuery)){
+$hQuery = mysql_query("SELECT id, title FROM time56 WHERE title IN (SELECT title FROM time56 GROUP BY title HAVING COUNT(title)>1);");
+while($aResult = mysql_fetch_assoc($hQuery))
+{
+   $aMas[] = $aResult;
+}
+echo $aMas[17]['id'];
+/*while($aResult = mysql_fetch_assoc($hQuery)){
  $aNews[] = $aResult;
 }
 
@@ -28,7 +27,7 @@ for ($i = 0 ; $i < count($aNews); ++$i)
             } 
         }
     } 
-    print_r($aValuesIns);
+    print_rе ($aValuesIns);
  	$aValuesIns = implode("," ,$aValuesIns);
 	$Query = "INSERT INTO `time56_category` (`news_id`, `category_id`) VALUES $aValuesIns;";
 	$hQuery = mysql_query($Query);
@@ -37,5 +36,4 @@ for ($i = 0 ; $i < count($aNews); ++$i)
 	}
 	else {
 	       echo "Не успешно";
-	}
-*/
+	} */
