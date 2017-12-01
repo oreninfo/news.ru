@@ -15,8 +15,8 @@ For($i = 0;$i<=count($aMas);$i++)
             echo $aMas[$i]['id']." == ".$aMas[$j]['id']."\r\n";
             $a = $aMas[$i]['id'];
             $b = $aMas[$j]['id'];
-            $hQuery = mysql_query("DELETE FROM time56 WHERE id='$b';");
-            $hQuery = mysql_query("UPDATE time56_category SET news_id='$a' WHERE news_id='$b';");
+            //$hQuery = mysql_query("DELETE FROM time56 WHERE id='$b';");
+            //$hQuery = mysql_query("UPDATE time56_category SET news_id='$a' WHERE news_id='$b';");
         }
     }
 }
