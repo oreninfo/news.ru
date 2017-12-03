@@ -1,26 +1,22 @@
 <?php
 $db = mysql_connect("localhost", "stas", "123456") or die ("MySQL сервер недоступен!" .mysql_error());
 mysql_select_db("link_bd", $db) or die ("Не удалось подключиться к базе даных!”" .mysql_error());
-$hQuery = mysql_query("SELECT * FROM `time56`");
-while($aResult = mysql_fetch_assoc($hQuery)){
- $aNews[] = $aResult;
+$hQuery = mysql_query("SELECT id, title, content_path FROM time56 WHERE title IN (SELECT title FROM time56 GROUP BY title HAVING COUNT(title)>1);");
+while($aResult = mysql_fetch_assoc($hQuery))
+{
+   $aMas[] = $aResult;
 }
-
-for ($i = 1 ; $i < count($aNews); ++$i)
-   {    $V=$aNews[$i][id].",".$aNews[$i][id_category];
-        $aValuesIns[]="('$V')";
-        for ($j = $i+1; $j<count($aNews);++$j){
-            if ($aNews[$i][title] === $aNews[$j][title] and $aNews[$i][image_path] === $aNews[$j][image_path]) {
-                $V=$aNews[$i][id].",".$aNews[$j][id_category];
-                $aValuesIns[]="('$V')";
-                if( isset($aNews[$j])  )
-                    {
-                    unset( $aNews[$j] );
-                    
-                    }
-               // --$j;
-            }
-        }0
+For($i = 0;$i<=count($aMas);$i++)
+{
+    For($j = $i+1;$j<=count($aMas);$j++)
+    {
+        If(strcmp($aMas[$i]['title'], $aMas[$j]['title']) == 0 AND strcmp($aMas[$i]['content_path'], $aMas[$j]['content_path']) == 0)
+        {
+            echo $aMas[$i]['id']." == ".$aMas[$j]['id']."\r\n";
+            $a = $aMas[$i]['id'];
+            $b = $aMas[$j]['id'];
+            //$hQuery = mysql_query("DELETE FROM time56 WHERE id='$b';");
+            //$hQuery = mysql_query("UPDATE time56_category SET news_id='$a' WHERE news_id='$b';");
+        }
     }
-    print_r($aValuesIns);
-?>
+}
