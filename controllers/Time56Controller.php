@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\data\Pagination;
 use app\models\Time56;
+use app\models\Time56Category;
 
 class Time56Controller extends Controller
 {
@@ -82,11 +83,12 @@ class Time56Controller extends Controller
     }
 	
 	public function actionObshestvo()
-    {   $query = Time56::find()->where(['id_category' => 1]);
+    {   $query = Time56Category::find()->where(['category_id' => 1]);
 	    $pagination = new Pagination([
 		   'defaultPageSize' => 5,
 		   'totalCount' => $query->count(),
 		 ]);
+                
 		 $titles = $query->orderBy(['created_at' => SORT_DESC])
 		 ->offset($pagination->offset)
 		 ->limit($pagination->limit)
