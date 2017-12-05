@@ -217,7 +217,7 @@ $hQuery = mysql_query("SELECT COUNT(id) FROM `time56`");
 $aTime56Count = mysql_fetch_array($hQuery);
 $iCountAddedNews = 0;
 foreach($aCategory as $sLinkCategory){	
-		$Query = "SELECT t.*, tc.category_id FROM time56 t LEFT JOIN time56_category tc ON t.id = tc.news_id LEFT JOIN category c ON c.id = tc.category_id WHERE c.id = '$sLinkCategory[id]' ORDER BY t.id ASC LIMIT 1";
+		$Query = "SELECT t.*, tc.category_id FROM time56 t LEFT JOIN time56_category tc ON t.id = tc.news_id LEFT JOIN category c ON c.id = tc.category_id WHERE c.id = '$sLinkCategory[id]' ORDER BY t.created_at DESC LIMIT 1";
                 $Query2 = "SELECT MAX(id) FROM `time56`";
                 $hQuery = mysql_query($Query) or trigger_error(mysql_error()." in ". $Query);
 	        $aResult = mysql_fetch_assoc($hQuery);
