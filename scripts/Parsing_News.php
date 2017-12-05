@@ -21,7 +21,7 @@ function Duplicate_Del()
                         echo $aMas[$i]['id']." == ".$aMas[$j]['id']."\r\n";
                         $a = $aMas[$i]['id'];
                         $b = $aMas[$j]['id'];
-                        unlink($);
+                        //unlink($);
                         $hQuery = mysql_query("DELETE FROM time56 WHERE id='$b';");
                         $hQuery = mysql_query("UPDATE time56_category SET news_id='$a' WHERE news_id='$b';");
                              }
@@ -82,7 +82,7 @@ function Parsing_News($sCategoryUrl,$iCategoryId,$aLastNews,$sCategoryName,$aTim
         $aRes = 0;
 	$iCountNews = 0;
 	$oTime = new DateTime();
-	$iPageCount = 1; //число страничек пагинации, т.е. сколько страничек парсить в каждой рубрике
+	$iPageCount = 6; //число страничек пагинации, т.е. сколько страничек парсить в каждой рубрике
        	for ($k=1; $k<=$iPageCount; $k++) {
 		$oHtml = file_get_html(trim($sCategoryUrl."page".$k)); //stranichka site
 		if ($oHtml === FALSE){
@@ -122,7 +122,7 @@ function Parsing_News($sCategoryUrl,$iCategoryId,$aLastNews,$sCategoryName,$aTim
                                                     $sFileName = microtime(). ".jpg";
                                                     $sWebPath = "photo/".$sFileName;
                                                     $sPathImage = dirname(__DIR__)."\web\photo\\".$sFileName;
-                                                    copy($aRes[1], $sPathImage);
+                                                    //copy($aRes[1], $sPathImage);
                                                     $aValues[] = "('$sTitle', '$sContent', '$sCreatedAt', '$sWebPath', '$sPathImage', '$sLinkNews->href')\r\n";
                                                     $iMaxId = $iMaxId + 1;
                                                     $aValuesTC[] = "('$iMaxId','$iCategoryId')\r\n";
@@ -217,7 +217,7 @@ $hQuery = mysql_query("SELECT COUNT(id) FROM `time56`");
 $aTime56Count = mysql_fetch_array($hQuery);
 $iCountAddedNews = 0;
 foreach($aCategory as $sLinkCategory){	
-		$Query = "SELECT t.*, tc.category_id FROM time56 t LEFT JOIN time56_category tc ON t.id = tc.news_id LEFT JOIN category c ON c.id = tc.category_id WHERE c.id = '$sLinkCategory[id]' ORDER BY tc.news_id ASC LIMIT 1";
+		$Query = "SELECT t.*, tc.category_id FROM time56 t LEFT JOIN time56_category tc ON t.id = tc.news_id LEFT JOIN category c ON c.id = tc.category_id WHERE c.id = '$sLinkCategory[id]' ORDER BY t.created_at DESC LIMIT 1";
                 $Query2 = "SELECT MAX(id) FROM `time56`";
                 $hQuery = mysql_query($Query) or trigger_error(mysql_error()." in ". $Query);
 	        $aResult = mysql_fetch_assoc($hQuery);
@@ -235,8 +235,9 @@ foreach($aCategory as $sLinkCategory){
                 }
                  //echo "======================================================================\r\n";
 		 //echo "Ссылка на рубрику -"." ".$sLinkCategory['category_link']." "."id - рубрики"." ".$sLinkCategory['id']." "."Последняя добавленная новость, дата"." ".$aResult['created_at']." "."160 str\r\n";
-                $iCountNews = Parsing_News($sLinkCategory['category_link'],$sLinkCategory['id'],$aResult,$sLinkCategory['category_my'],$aTime56Count[0], $iMaxId);
-		$iCountAddedNews=$iCountAddedNews+$iCountNews; //сумма добавленных новостей. 
+                print_r($aResult);
+                //$iCountNews = Parsing_News($sLinkCategory['category_link'],$sLinkCategory['id'],$aResult,$sLinkCategory['category_my'],$aTime56Count[0], $iMaxId);
+		//$iCountAddedNews=$iCountAddedNews+$iCountNews; //сумма добавленных новостей. 
 			
 }
 echo "Всего добавлено ".$iCountAddedNews." новостей\r\n";
