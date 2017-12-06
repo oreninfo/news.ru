@@ -22,8 +22,8 @@ function Duplicate_Del()
                         $a = $aMas[$i]['id'];
                         $b = $aMas[$j]['id'];
                         //unlink($);
-                        //$hQuery = mysql_query("DELETE FROM time56 WHERE id='$b';");
-                        //$hQuery = mysql_query("UPDATE time56_category SET news_id='$a' WHERE news_id='$b';");
+                        $hQuery = mysql_query("DELETE FROM time56 WHERE id='$b';");
+                        $hQuery = mysql_query("UPDATE time56_category SET news_id='$a' WHERE news_id='$b';");
                              }
                              
                             }
@@ -68,7 +68,7 @@ function IsNewsExist($iCategoryId,$sLink,$sDate,$aLastNews,$aTime56Count){
 					return 1; ////
 }
 //функция парсинга страничек новостных///
-function Parsing_News($sCategoryUrl,$iCategoryId,$aLastNews,$sCategoryName,$aTime56Count,$iMaxId){
+function Parsing_News($sCategoryUrl,$iCategoryId,$aLastNews,$sCategoryName,$aTime56Count,$iMaxId,$oTime){
 //$sCategoryUrl - ссылка на рубрику сайта получена из БД
 //$iCategoryId - id рубрики сайта
 //$aLastNews - sql запрос, в котором храниться самая последняя новость из конкретной рубрики $id
@@ -81,8 +81,8 @@ function Parsing_News($sCategoryUrl,$iCategoryId,$aLastNews,$sCategoryName,$aTim
 	$aValues = [];
         $aRes = 0;
 	$iCountNews = 0;
-	$oTime = new DateTime();
-	$iPageCount = 1; //число страничек пагинации, т.е. сколько страничек парсить в каждой рубрике
+	//$oTime = new DateTime();
+	$iPageCount = 3; //число страничек пагинации, т.е. сколько страничек парсить в каждой рубрике
        	for ($k=1; $k<=$iPageCount; $k++) {
 		$oHtml = file_get_html(trim($sCategoryUrl."page".$k)); //stranichka site
 		if ($oHtml === FALSE){
@@ -207,6 +207,7 @@ function Add_News_in_DB($aValues,$iCountNews,$aValuesTC){
 	}
 }
 //telo programm//
+$oTime = new DateTime();
 $start = microtime(true);
 $db = mysql_connect("localhost", "stas", "123456") or die ("MySQL сервер недоступен!" .mysql_error());
 mysql_select_db("link_bd", $db) or die ("Не удалось подключиться к базе даных!”" .mysql_error());
@@ -236,7 +237,7 @@ foreach($aCategory as $sLinkCategory){
                  //echo "======================================================================\r\n";
 		 //echo "Ссылка на рубрику -"." ".$sLinkCategory['category_link']." "."id - рубрики"." ".$sLinkCategory['id']." "."Последняя добавленная новость, дата"." ".$aResult['created_at']." "."160 str\r\n";
                 //print_r($aResult);
-                $iCountNews = Parsing_News($sLinkCategory['category_link'],$sLinkCategory['id'],$aResult,$sLinkCategory['category_my'],$aTime56Count[0], $iMaxId);
+                $iCountNews = Parsing_News($sLinkCategory['category_link'],$sLinkCategory['id'],$aResult,$sLinkCategory['category_my'],$aTime56Count[0], $iMaxId, $oTime);
 		$iCountAddedNews=$iCountAddedNews+$iCountNews; //сумма добавленных новостей. 
 			
 }
