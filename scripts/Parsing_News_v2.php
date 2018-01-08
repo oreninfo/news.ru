@@ -1,38 +1,8 @@
 <?php
 set_time_limit(0);
 include 'simple_html_dom.php';
-//функция удаления дубликатов новостей из базы данных
-function Duplicate_Del()
-{   
-    //$aResult - результат запроса
-    //$aMas - массив с результатом запроса
-    $hQuery = mysql_query("SELECT id, title, local_image_path, content_path FROM time56 WHERE title IN (SELECT title FROM time56 GROUP BY title HAVING COUNT(title)>1);");
-    while($aResult = mysql_fetch_assoc($hQuery))
-            {
-                $aMas[] = $aResult;
-        
-            }
-            For($i = 0;$i<=count($aMas);$i++)
-            {
-                For($j = $i+1;$j<=count($aMas);$j++)
-                {
-                    If(strcmp($aMas[$i]['title'], $aMas[$j]['title']) == 0 AND strcmp($aMas[$i]['content_path'], $aMas[$j]['content_path']) == 0)
-                            {
-                        echo $aMas[$i]['id']." == ".$aMas[$j]['id']."\r\n";
-                        $a = $aMas[$i]['id'];
-                        $b = $aMas[$j]['id'];
-                        //unlink($);
-                        $hQuery = mysql_query("DELETE FROM time56 WHERE id='$b';");
-                        $hQuery = mysql_query("UPDATE time56_category SET news_id='$a' WHERE news_id='$b';");
-                             }
-                             
-                            }
-                            
-                            }
-    return;
-}
 //функция проверки ссылки с сайта на равенство ссылке в базе данных
-function IsNewsExist($iCategoryId,$sLink,$sDate,$aLastNews,$aTime56Count){
+function IsNewsExist($iCategoryId,$sLink,$sDate,$sTitleNews){
 //$iCategoryId - id, той рубрики, которую в данный момент мы парсим
 //$sLink - ссылка на новость, которую мы в данный момент парсим
 //$sDate- дата с сайта новости $sLink
@@ -40,35 +10,30 @@ function IsNewsExist($iCategoryId,$sLink,$sDate,$aLastNews,$aTime56Count){
 //$aTime56Count - количество новостей в таблице time56
 	$TD = trim($sDate);
 	$sDate = date("Y-m-d", strtotime($TD));
-	if ($aTime56Count !== 0) {
-		$sLastNewsAddDate = strtok($aLastNews['created_at'], " ");
-		//echo "сравниваем дату"." ".$sDate." "."с датой"." ".$sLastNewsAddDate." "."15 str\r\n";
-		if (trim($sDate)>trim($sLastNewsAddDate)) {
-			//echo "Дата больше\r\n";
-			return 1;
+        //$Query = "SELECT id, title, content_path FROM `time56` WHERE content_path = '$sLink' AND title = '$sTitleNews'";
+        $Query = "SELECT t.id, t.title, t.content_path, tc.category_id FROM time56 t LEFT JOIN time56_category tc ON t.id = tc.news_id LEFT JOIN category c ON c.id = tc.category_id WHERE t.title = '$sTitleNews' AND t.content_path = '$sLink'";
+        $hQuery = mysql_query($Query) or trigger_error(mysql_error()." in ". $Query);
+	$aResult = mysql_fetch_assoc($hQuery);
+        if($aResult !== FALSE)
+        {
+            if($iCategoryId == $aResult['category_id'])
+            {
+                echo "такая новость"." "."'".$sTitleNews."'"."совпадает с таковой в базе"." "."'".$aResult['title']."'"."\r\n";
+                echo "их категории равны"." ".$iCategoryId." == ".$aResult['category_id'];
+                return 0; //добавлять новость не надо
+            }
+            else
+            {
+                //добавляем только категорию в связанную таблицу к айдишнику новости
+                $Query = "INSERT INTO `time56_category` (`news_id`, `category_id`) VALUES $aResult[id], $iCategoryId;";
+            }
         }
-		elseif(trim($sDate) === trim($sLastNewsAddDate)) {
-			//echo "Дата равна\r\n";
-			$sResult = strpos($sLink, $aLastNews['content_path']);
-			if ($sResult !== FALSE) {
-				//echo "строки равны, не требуется добавлять в базу\r\n";
-				return 0; 
-			}
-			else {
-				//echo "строки не равны, добавляем новость в базу\r\n";
-				return 1; 
-			}
-		}
-		else {
-			//echo "новость на сайте уже есть в базе\r\n";
-			return 0;
-		}
-	}
-	//echo "база пуста, поэтому добавляем новость\r\n";
-					return 1; ////
+        else {    
+            return 1;
+        }
 }
 //функция парсинга страничек новостных///
-function Parsing_News($sCategoryUrl,$iCategoryId,$aLastNews,$sCategoryName,$aTime56Count,$iMaxId){
+function Parsing_News($sCategoryUrl,$iCategoryId,$sCategoryName){
 //$sCategoryUrl - ссылка на рубрику сайта получена из БД
 //$iCategoryId - id рубрики сайта
 //$aLastNews - sql запрос, в котором храниться самая последняя новость из конкретной рубрики $id
@@ -81,8 +46,14 @@ function Parsing_News($sCategoryUrl,$iCategoryId,$aLastNews,$sCategoryName,$aTim
 	$aValues = [];
         $aRes = 0;
 	$iCountNews = 0;
+        $iPageCount = 1; //число страничек пагинации, т.е. сколько страничек парсить в каждой рубрике
 	$oTime = new DateTime();
-	$iPageCount = 6; //число страничек пагинации, т.е. сколько страничек парсить в каждой рубрике
+        $Query = "SELECT * FROM `time56`";
+        $hQuery = mysql_query($Query) or trigger_error(mysql_error()." in ". $Query);
+	$aResult = mysql_fetch_assoc($hQuery);
+        if($aResult === FALSE)
+        {
+        $iMaxId = 0;    
        	for ($k=1; $k<=$iPageCount; $k++) {
 		$oHtml = file_get_html(trim($sCategoryUrl."page".$k)); //stranichka site
 		if ($oHtml === FALSE){
@@ -93,7 +64,7 @@ function Parsing_News($sCategoryUrl,$iCategoryId,$aLastNews,$sCategoryName,$aTim
 				$sLinkNews = $element->find("div[class=news_name] a",0);
 				$sNewsDate = $element->find("div[class=news_date]",0);
 				//echo $sLinkNews->href." ".$sNewsDate->plaintext."Эту новость будем сравнивать с новостью из базы 59 str\r\n";
-				if ($aLastNews !== FALSE){
+				/*if ($aLastNews !== FALSE){
 					if (IsNewsExist($iCategoryId,$sLinkNews->href,$sNewsDate->plaintext,$aLastNews,$aTime56Count) == 0) {	
 					$oHtml->clear();
 				        unset($oHtml);
@@ -101,6 +72,73 @@ function Parsing_News($sCategoryUrl,$iCategoryId,$aLastNews,$sCategoryName,$aTim
 					$iResult = Add_News_in_DB($aValues,$iCountNews,$aValuesTC);
                                         echo "Добавлено"." ".$iResult." "."новостей в рубрику"." ".'"'.$sCategoryName.'"'."!"."\r\n";
 				        return $iResult;
+					}
+                                        //echo "77 строка \r\n";
+				}*/
+				//echo $sLinkNews->href." ".$sNewsDate->plaintext."Новость прошла проверку на добавление 68 str\r\n";
+				$oHtml2 = file_get_html(trim($sLinkNews->href));
+				if ($oHtml2 === FALSE){
+					echo "Error parsing news\r\n";
+					return 0;
+				}
+				foreach($oHtml2->find('div[class=news_text]') as $element2) {
+					$sTitle = trim($element2->find("h1",0)->plaintext);
+					if (!empty($sTitle)){
+						$sContent = trim($element2->find("div[class=news_text]",0)->plaintext);
+						$sImagePath = $element2->find("img[src]",0);
+						$sCreatedAt = trim($element2->find("span[class=date_info]",0)->plaintext);
+				                $sCreatedAt = date("Y-m-d", strtotime($sCreatedAt))." ".$oTime->format('H:i:s');
+				                preg_match("/<img[^>]+src\s*=\s*[\"']\/?([^\"']+)[\"'][^>]*\>/", $sImagePath, $aRes);
+				                if (!empty($sContent) && !empty($sCreatedAt) && !empty($aRes[1])) {
+                                                    $sFileName = microtime(). ".jpg";
+                                                    $sWebPath = "photo/".$sFileName;
+                                                    $sPathImage = dirname(__DIR__)."\web\photo\\".$sFileName;
+                                                    //copy($aRes[1], $sPathImage);
+                                                    $aValues[] = "('$sTitle', '$sContent', '$sCreatedAt', '$sWebPath', '$sPathImage', '$sLinkNews->href')\r\n";
+                                                    $iMaxId = $iMaxId + 1;
+                                                    $aValuesTC[] = "('$iMaxId','$iCategoryId')\r\n";
+					            $oTime = $oTime->modify('-1 minute');
+						 //echo "Новость"." ".$sLinkNews->href." "."добавили 85str \r\n"; 
+						 }
+					}					
+				}
+				$iCountNews++;				
+			}
+                      
+	}
+        
+	$iResult = Add_News_in_DB($aValues,$iCountNews,$aValuesTC);
+	echo "Добавлено"." ".$iResult." "."новостей в рубрику"." ".'"'.$sCategoryName.'"'."!"."\r\n";
+	return $iResult;
+        
+        
+         }
+         else 
+             {
+             $Query2 = "SELECT MAX(id) FROM `time56`";
+             $hQuery2 = mysql_query($Query2) or trigger_error(mysql_error()." in ". $Query2);
+	     $aMaxId = mysql_fetch_assoc($hQuery2);
+             $iMaxId = $aMaxId["MAX(id)"];    
+       	      for ($k=1; $k<=$iPageCount; $k++) {
+		$oHtml = file_get_html(trim($sCategoryUrl."page".$k)); //stranichka site
+		if ($oHtml === FALSE){
+			echo "Error parsing news 53 str\r\n";
+			return 0;
+		}
+			foreach($oHtml->find('div[class=news]') as $element) {
+				$sLinkNews = $element->find("div[class=news_name] a",0);
+				$sNewsDate = $element->find("div[class=news_date]",0);
+				
+                                
+                                //echo $sLinkNews->href." ".$sNewsDate->plaintext."Эту новость будем сравнивать с новостью из базы 59 str\r\n";
+				if (IsNewsExist($iCategoryId,$sLinkNews->href,$sNewsDate->plaintext,$sLinkNews->plaintext) == 0) {	
+					$oHtml->clear();
+				        unset($oHtml);
+                                        continue;
+					/*echo "71 строка \r\n";
+					$iResult = Add_News_in_DB($aValues,$iCountNews,$aValuesTC);
+                                        echo "Добавлено"." ".$iResult." "."новостей в рубрику"." ".'"'.$sCategoryName.'"'."!"."\r\n";
+				        return $iResult;*/
 					}
                                         //echo "77 строка \r\n";
 				}
@@ -139,6 +177,12 @@ function Parsing_News($sCategoryUrl,$iCategoryId,$aLastNews,$sCategoryName,$aTim
 	$iResult = Add_News_in_DB($aValues,$iCountNews,$aValuesTC);
 	echo "Добавлено"." ".$iResult." "."новостей в рубрику"." ".'"'.$sCategoryName.'"'."!"."\r\n";
 	return $iResult;
+        
+              
+    
+             
+           
+      
 }
 
 ///////функция получения рубрик////////
@@ -217,12 +261,13 @@ $hQuery = mysql_query("SELECT COUNT(id) FROM `time56`");
 $aTime56Count = mysql_fetch_array($hQuery);
 $iCountAddedNews = 0;
 foreach($aCategory as $sLinkCategory){	
-		$Query = "SELECT t.*, tc.category_id FROM time56 t LEFT JOIN time56_category tc ON t.id = tc.news_id LEFT JOIN category c ON c.id = tc.category_id WHERE c.id = '$sLinkCategory[id]' ORDER BY t.created_at DESC LIMIT 1";
-                $Query2 = "SELECT MAX(id) FROM `time56`";
-                $hQuery = mysql_query($Query) or trigger_error(mysql_error()." in ". $Query);
-	        $aResult = mysql_fetch_assoc($hQuery);
-                $hQuery2 = mysql_query($Query2) or trigger_error(mysql_error()." in ". $Query2);
-	        $aMaxId = mysql_fetch_assoc($hQuery2);
+		//$Query = "SELECT t.*, tc.category_id FROM time56 t LEFT JOIN time56_category tc ON t.id = tc.news_id LEFT JOIN category c ON c.id = tc.category_id WHERE c.id = '$sLinkCategory[id]' ORDER BY t.created_at DESC LIMIT 1";
+                //$Query2 = "SELECT MAX(id) FROM `time56`";
+                //$Query = "SELECT * FROM `time56`";
+                //$hQuery = mysql_query($Query) or trigger_error(mysql_error()." in ". $Query);
+	        //$aResult = mysql_fetch_assoc($hQuery);
+                //$hQuery2 = mysql_query($Query2) or trigger_error(mysql_error()." in ". $Query2);
+	        /*$aMaxId = mysql_fetch_assoc($hQuery2);
                 if ($aMaxId["MAX(id)"] == FALSE)
                 {
                     $iMaxId = 0;
@@ -232,15 +277,15 @@ foreach($aCategory as $sLinkCategory){
                 {
                     $iMaxId = $aMaxId["MAX(id)"];
                     
-                }
+                }*/
+                
                  //echo "======================================================================\r\n";
 		 //echo "Ссылка на рубрику -"." ".$sLinkCategory['category_link']." "."id - рубрики"." ".$sLinkCategory['id']." "."Последняя добавленная новость, дата"." ".$aResult['created_at']." "."160 str\r\n";
-                print_r($aResult);
-                //$iCountNews = Parsing_News($sLinkCategory['category_link'],$sLinkCategory['id'],$aResult,$sLinkCategory['category_my'],$aTime56Count[0], $iMaxId);
-		//$iCountAddedNews=$iCountAddedNews+$iCountNews; //сумма добавленных новостей. 
-			
+                
+                $iCountNews = Parsing_News($sLinkCategory['category_link'],$sLinkCategory['id'],$sLinkCategory['category_my']);
+		$iCountAddedNews=$iCountAddedNews+$iCountNews; //сумма добавленных новостей. 
+                exit();
 }
 echo "Всего добавлено ".$iCountAddedNews." новостей\r\n";
-Duplicate_Del();
 echo 'Время выполнения скрипта: '.(microtime(true) - $start).' сек.'; 
 ?>
