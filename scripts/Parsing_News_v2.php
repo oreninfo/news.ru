@@ -18,14 +18,22 @@ function IsNewsExist($iCategoryId,$sLink,$sDate,$sTitleNews){
         {
             if($iCategoryId == $aResult['category_id'])
             {
-                echo "такая новость"." "."'".$sTitleNews."'"."совпадает с таковой в базе"." "."'".$aResult['title']."'"."\r\n";
-                echo "их категории равны"." ".$iCategoryId." == ".$aResult['category_id'];
+                //echo "такая новость"." "."'".$sTitleNews."'"."совпадает с таковой в базе"." "."'".$aResult['title']."'"."\r\n";
+                //echo "их категории равны"." ".$iCategoryId." == ".$aResult['category_id']."\r\n";
                 return 0; //добавлять новость не надо
             }
             else
-            {
+            {   //НАДО ТУТ делать перепроверку совпадений категорий
+                //echo "их категории не равны"." ".$iCategoryId." == ".$aResult['category_id']."\r\n";
                 //добавляем только категорию в связанную таблицу к айдишнику новости
-                $Query = "INSERT INTO `time56_category` (`news_id`, `category_id`) VALUES $aResult[id], $iCategoryId;";
+                $Query2 = "SELECT news_id, category_id FROM `time56_category` WHERE news_id = '$aResult[id]' AND category_id = '$iCategoryId';";
+                $hQuery2 = mysql_query($Query2) or trigger_error(mysql_error()." in ". $Query2);
+                $aResult2 = mysql_fetch_assoc($hQuery2);
+                if($aResult2 === FALSE){
+                $Query = "INSERT INTO `time56_category` (`news_id`, `category_id`) VALUES ($aResult[id], $iCategoryId);";
+                $hQuery = mysql_query($Query) or trigger_error(mysql_error()." in ". $Query);
+                }
+                return 0;
             }
         }
         else {    
@@ -106,7 +114,10 @@ function Parsing_News($sCategoryUrl,$iCategoryId,$sCategoryName){
 			}
                       
 	}
-        
+        $oHtml->clear();
+        unset($oHtml);
+        $oHtml2->clear();
+        unset($oHtml2);
 	$iResult = Add_News_in_DB($aValues,$iCountNews,$aValuesTC);
 	echo "Добавлено"." ".$iResult." "."новостей в рубрику"." ".'"'.$sCategoryName.'"'."!"."\r\n";
 	return $iResult;
@@ -132,8 +143,8 @@ function Parsing_News($sCategoryUrl,$iCategoryId,$sCategoryName){
                                 
                                 //echo $sLinkNews->href." ".$sNewsDate->plaintext."Эту новость будем сравнивать с новостью из базы 59 str\r\n";
 				if (IsNewsExist($iCategoryId,$sLinkNews->href,$sNewsDate->plaintext,$sLinkNews->plaintext) == 0) {	
-					$oHtml->clear();
-				        unset($oHtml);
+					//$oHtml->clear();
+				        //unset($oHtml);
                                         continue;
 					/*echo "71 строка \r\n";
 					$iResult = Add_News_in_DB($aValues,$iCountNews,$aValuesTC);
@@ -141,7 +152,7 @@ function Parsing_News($sCategoryUrl,$iCategoryId,$sCategoryName){
 				        return $iResult;*/
 					}
                                         //echo "77 строка \r\n";
-				}
+				
 				//echo $sLinkNews->href." ".$sNewsDate->plaintext."Новость прошла проверку на добавление 68 str\r\n";
 				$oHtml2 = file_get_html(trim($sLinkNews->href));
 				if ($oHtml2 === FALSE){
@@ -174,15 +185,11 @@ function Parsing_News($sCategoryUrl,$iCategoryId,$sCategoryName){
                       
 	}
         
+        
 	$iResult = Add_News_in_DB($aValues,$iCountNews,$aValuesTC);
 	echo "Добавлено"." ".$iResult." "."новостей в рубрику"." ".'"'.$sCategoryName.'"'."!"."\r\n";
 	return $iResult;
-        
-              
-    
-             
-           
-      
+}
 }
 
 ///////функция получения рубрик////////
@@ -284,7 +291,7 @@ foreach($aCategory as $sLinkCategory){
                 
                 $iCountNews = Parsing_News($sLinkCategory['category_link'],$sLinkCategory['id'],$sLinkCategory['category_my']);
 		$iCountAddedNews=$iCountAddedNews+$iCountNews; //сумма добавленных новостей. 
-                exit();
+                
 }
 echo "Всего добавлено ".$iCountAddedNews." новостей\r\n";
 echo 'Время выполнения скрипта: '.(microtime(true) - $start).' сек.'; 
